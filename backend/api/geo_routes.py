@@ -1,36 +1,29 @@
-from fastapi import APIRouter
-from models.geospatial_models import GeoLookupRequest
+from fastapi import APIRouter, HTTPException
+from models.schemas import GeoLookupRequest, GeoLookupResponse
+from tools.geospatial_tool import geospatial_lookup, _load_mock_data
 
-router = APIRouter()
+geo_router = APIRouter()
 
-@router.get("/regions")
-async def get_regions():
-    """Returns known regions and coordinates from mock data."""
-    # TODO: Wire up to backend/data/soil.json
-    return {
-        "status": "success",
-        "data": [
-            {"region_code": "MW-C", "region_name": "Central Region, Malawi", "centroid_lat": -13.7882, "centroid_lon": 34.4598}
-        ]
-    }
-
-@router.post("/lookup")
-async def geospatial_lookup(payload: GeoLookupRequest):
-    """
-    Takes coordinates and returns the localized mock data slices.
-    Unblocks the frontend UI for dashboard visualization.
-    """
-    # TODO: Wire up to backend.tools.geospatial_tool
-    return {
-        "status": "success",
-        "data": {
-            "nearest_region": {
-                "region_code": "MW-C",
-                "region_name": "Central Region, Malawi",
-                "centroid_lat": -13.7882,
-                "centroid_lon": 34.4598
-            },
-            "soil_profile": {"surface_vsm_percent": 12.5, "status": "Deficit"},
-            "weather_profile": {"temperature_c": 28.4, "humidity_percent": 41}
+@geo_router.get("/regions")
+def list_geo_regions():
+    """Returns all known regions from the mock data."""
+    soil_data = _load_mock_data("soil.json")
+    regions = [
+        {
+            "region": item.get("region"),
+            "region_code": item.get("region_code"),
+            "centroid_latitude": item.get("centroid_latitude"),
+            "centroid_longitude": item.get("centroid_longitude")
         }
-    }
+        for item in soil_data
+    ]
+    return {"regions": regions}
+
+@geo_router.post("/lookup", response_model=GeoLookupResponse)
+def geo_lookup(request: GeoLookupRequest):
+    """Calculates nearest region and returns aggregated local data."""
+    try:
+        data = geospatial_lookup(request.latitude, request.longitude, request.crop)
+        return data
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))

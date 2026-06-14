@@ -4,6 +4,7 @@
     "price_per_kg_usd": 0.22,
     "demand": "high",
     "region": "Central Malawi",
+    "region_code": "MW-C",
     "month": "June"
   },
   {
@@ -11,6 +12,7 @@
     "price_per_kg_usd": 0.45,
     "demand": "medium",
     "region": "Central Malawi",
+    "region_code": "MW-C",
     "month": "June"
   },
   {
@@ -18,6 +20,7 @@
     "price_per_kg_usd": 1.80,
     "demand": "low",
     "region": "Northern Malawi",
+    "region_code": "MW-N",
     "month": "June"
   },
   {
@@ -25,6 +28,7 @@
     "price_per_kg_usd": 0.60,
     "demand": "high",
     "region": "Southern Malawi",
+    "region_code": "MW-S",
     "month": "June"
   },
   {
@@ -32,6 +36,7 @@
     "price_per_kg_usd": 0.55,
     "demand": "medium",
     "region": "Southern Malawi",
+    "region_code": "MW-S",
     "month": "June"
   }
 ]

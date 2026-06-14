@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+
+# Imports
 from api.routes import router
-from api.geo_routes import router as geo_router # Import the geo_router
+from api.geo_routes import geo_router
 
 load_dotenv()
 
@@ -16,8 +18,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 1. The team's LangGraph orchestrator route
 app.include_router(router, prefix="/api")
 
+# 2. YOUR new geospatial routes (This is the line that was missing!)
+app.include_router(geo_router, prefix="/api/geo", tags=["Geospatial Data"])
 
 @app.get("/")
 def root():

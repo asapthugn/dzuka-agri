@@ -1,6 +1,7 @@
 [
   {
     "region": "Central Malawi",
+    "region_code": "MW-C",
     "month": "June",
     "avg_temp_c": 18,
     "rainfall_mm": 5,
@@ -9,6 +10,7 @@
   },
   {
     "region": "Central Malawi",
+    "region_code": "MW-C",
     "month": "November",
     "avg_temp_c": 26,
     "rainfall_mm": 120,
@@ -17,6 +19,7 @@
   },
   {
     "region": "Northern Malawi",
+    "region_code": "MW-N",
     "month": "June",
     "avg_temp_c": 15,
     "rainfall_mm": 2,
@@ -25,6 +28,7 @@
   },
   {
     "region": "Southern Malawi",
+    "region_code": "MW-S",
     "month": "June",
     "avg_temp_c": 20,
     "rainfall_mm": 8,
