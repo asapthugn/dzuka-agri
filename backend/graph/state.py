@@ -16,6 +16,7 @@ class DzukaState(TypedDict):
     agronomy_output: str
     climate_output: str
     pest_output: str
+    market_output: str
 
     # Review
     final_recommendation: str

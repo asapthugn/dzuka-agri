@@ -1,43 +1,20 @@
 from services.openai_service import client
 from graph.state import DzukaState
+from prompts.review_prompt import get_review_prompt
 
 
 def review_agent(state: DzukaState):
 
-    prompt = f"""
-You are a senior agricultural advisor.
-
-Combine the outputs from the following experts into a single action plan.
-
-Agronomy Expert:
-{state['agronomy_output']}
-
-Climate Expert:
-{state['climate_output']}
-
-Pest Expert:
-{state['pest_output']}
-
-Provide:
-
-1. Summary of the situation.
-2. Recommended actions.
-3. Priority order.
-4. Final advice.
-
-Keep the answer structured and concise.
-"""
+    prompt = get_review_prompt(
+        state["agronomy_output"],
+        state["climate_output"],
+        state["pest_output"],
+        state["market_output"]
+    )
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
+        messages=[{"role": "user", "content": prompt}]
     )
 
-    return {
-        "final_recommendation": response.choices[0].message.content
-    }
+    return {"final_recommendation": response.choices[0].message.content}
