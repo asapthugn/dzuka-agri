@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+langgraph
+langchain
+langchain-core
+langchain-google-genai
+python-dotenv
+pydantic
+requests
+geopy
+openai
+pillow
