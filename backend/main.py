@@ -1,13 +1,6 @@
-from graph.workflow import app
+from fastapi import FastAPI
+from api.routes import router
 
-initial_state = {
-    "crop": "maize",
-    "symptoms": "yellow leaves",
-    "latitude": -6.9,
-    "longitude": 107.6,
-    "task": "diagnose"
-}
+app = FastAPI()
 
-result = app.invoke(initial_state)
-
-print(result["final_recommendation"])
+app.include_router(router)

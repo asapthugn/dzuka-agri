@@ -1,26 +1,43 @@
+from services.openai_service import client
 from graph.state import DzukaState
 
 
 def review_agent(state: DzukaState):
 
-    agronomy = state["agronomy_output"]
-    climate = state["climate_output"]
-    pest = state["pest_output"]
+    prompt = f"""
+You are a senior agricultural advisor.
 
-    recommendation = f"""
-Agronomy:
-{agronomy}
+Combine the outputs from the following experts into a single action plan.
 
-Climate:
-{climate}
+Agronomy Expert:
+{state['agronomy_output']}
 
-Pest Analysis:
-{pest}
+Climate Expert:
+{state['climate_output']}
 
-Final Advice:
-Delay fertilizer application if heavy rainfall is expected.
+Pest Expert:
+{state['pest_output']}
+
+Provide:
+
+1. Summary of the situation.
+2. Recommended actions.
+3. Priority order.
+4. Final advice.
+
+Keep the answer structured and concise.
 """
 
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
+
     return {
-        "final_recommendation": recommendation
+        "final_recommendation": response.choices[0].message.content
     }
