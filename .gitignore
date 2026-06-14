@@ -19,3 +19,10 @@ dist/
 # IDE
 .vscode/
 .idea/
+
+# Claude / AI tooling
+CLAUDE.md
+**/CLAUDE.md
+AGENTS.md
+**/AGENTS.md
+.claude/
