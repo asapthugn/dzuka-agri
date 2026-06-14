@@ -70,10 +70,34 @@ export default function AnalyzePage() {
   const [result, setResult] = useState<string | null>(null);
   const [imageAnalysis, setImageAnalysis] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [geoData, setGeoData] = useState<Record<string, any> | null>(null);
+  const [geoLoading, setGeoLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const agentStatuses = useAgentSimulation(loading);
+
+  const lookupRegion = useCallback(async (latitude: number, longitude: number) => {
+    setGeoLoading(true);
+    try {
+      const res = await fetch("/api/geo/lookup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ latitude, longitude }),
+      });
+      if (res.ok) setGeoData(await res.json());
+    } catch {
+      // geo lookup is enhancement only, fail silently
+    } finally {
+      setGeoLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (lat === null || lng === null) return;
+    const timer = setTimeout(() => lookupRegion(lat, lng), 800);
+    return () => clearTimeout(timer);
+  }, [lat, lng, lookupRegion]);
 
   const detectLocation = useCallback(() => {
     if (!navigator.geolocation) {
@@ -84,16 +108,19 @@ export default function AnalyzePage() {
     setLocError("");
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setLat(parseFloat(pos.coords.latitude.toFixed(4)));
-        setLng(parseFloat(pos.coords.longitude.toFixed(4)));
+        const latitude = parseFloat(pos.coords.latitude.toFixed(4));
+        const longitude = parseFloat(pos.coords.longitude.toFixed(4));
+        setLat(latitude);
+        setLng(longitude);
         setLocating(false);
+        lookupRegion(latitude, longitude);
       },
       () => {
         setLocError("Could not detect location. Enter coordinates manually.");
         setLocating(false);
       }
     );
-  }, []);
+  }, [lookupRegion]);
 
   const handleImageChange = (file: File | null) => {
     if (!file) return;
@@ -161,6 +188,7 @@ export default function AnalyzePage() {
     setResult(null);
     setImageAnalysis(null);
     setError(null);
+    setGeoData(null);
   };
 
   const canSubmit = crop && lat !== null && lng !== null && !loading;
@@ -229,9 +257,29 @@ export default function AnalyzePage() {
               )}
 
               {lat !== null && lng !== null && (
-                <div className="text-sm text-primary font-medium bg-primary/5 px-3 py-2 rounded-lg inline-flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5" />
-                  {lat}, {lng}
+                <div className="space-y-2">
+                  <div className="text-sm text-primary font-medium bg-primary/5 px-3 py-2 rounded-lg inline-flex items-center gap-2">
+                    <MapPin className="w-3.5 h-3.5" />
+                    {lat}, {lng}
+                    {geoLoading && <Loader2 className="w-3 h-3 animate-spin ml-1" />}
+                  </div>
+                  {geoData && (
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">
+                        📍 {geoData.nearest_region?.region}
+                      </span>
+                      {geoData.soil && (
+                        <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-medium">
+                          🌱 {geoData.soil.soil_type} · pH {geoData.soil.ph}
+                        </span>
+                      )}
+                      {geoData.weather && (
+                        <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-medium">
+                          🌤 {geoData.weather.season} season · {geoData.weather.avg_temp_c}°C
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
 
