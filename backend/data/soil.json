@@ -1,0 +1,32 @@
+[
+  {
+    "region": "Central Malawi",
+    "soil_type": "Sandy Loam",
+    "ph": 6.2,
+    "nitrogen_ppm": 18,
+    "phosphorus_ppm": 12,
+    "potassium_ppm": 95,
+    "organic_matter_pct": 2.1,
+    "moisture_pct": 34
+  },
+  {
+    "region": "Northern Malawi",
+    "soil_type": "Clay",
+    "ph": 5.8,
+    "nitrogen_ppm": 22,
+    "phosphorus_ppm": 9,
+    "potassium_ppm": 110,
+    "organic_matter_pct": 3.4,
+    "moisture_pct": 48
+  },
+  {
+    "region": "Southern Malawi",
+    "soil_type": "Loam",
+    "ph": 6.7,
+    "nitrogen_ppm": 15,
+    "phosphorus_ppm": 17,
+    "potassium_ppm": 88,
+    "organic_matter_pct": 1.8,
+    "moisture_pct": 29
+  }
+]

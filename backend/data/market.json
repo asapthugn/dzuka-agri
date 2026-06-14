@@ -1,0 +1,37 @@
+[
+  {
+    "crop": "Maize",
+    "price_per_kg_usd": 0.22,
+    "demand": "high",
+    "region": "Central Malawi",
+    "month": "June"
+  },
+  {
+    "crop": "Soybean",
+    "price_per_kg_usd": 0.45,
+    "demand": "medium",
+    "region": "Central Malawi",
+    "month": "June"
+  },
+  {
+    "crop": "Tobacco",
+    "price_per_kg_usd": 1.80,
+    "demand": "low",
+    "region": "Northern Malawi",
+    "month": "June"
+  },
+  {
+    "crop": "Groundnut",
+    "price_per_kg_usd": 0.60,
+    "demand": "high",
+    "region": "Southern Malawi",
+    "month": "June"
+  },
+  {
+    "crop": "Rice",
+    "price_per_kg_usd": 0.55,
+    "demand": "medium",
+    "region": "Southern Malawi",
+    "month": "June"
+  }
+]
