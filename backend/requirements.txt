@@ -10,3 +10,4 @@ requests
 geopy
 openai
 pillow
+python-multipart>=0.0.9

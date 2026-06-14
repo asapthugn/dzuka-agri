@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from api.routes import router
+from api.geo_routes import router as geo_router # Import the geo_router
 
 load_dotenv()
 
