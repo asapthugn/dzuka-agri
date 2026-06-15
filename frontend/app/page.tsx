@@ -140,6 +140,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats */}
+      <section className="bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            {[
+              { value: "5",     label: "AI Agents" },
+              { value: "3",     label: "Malawi Regions" },
+              { value: "Live",  label: "Weather Data" },
+              { value: "< 60s", label: "Analysis Time" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div className="text-3xl font-black text-primary mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-500">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section id="how-it-works" className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

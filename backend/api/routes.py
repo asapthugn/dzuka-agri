@@ -19,7 +19,13 @@ def recommendation(request: RecommendationRequest):
             "task": "diagnose"
         }
         result = app.invoke(initial_state)
-        return {"recommendation": result["final_recommendation"]}
+        return {
+            "recommendation": result["final_recommendation"],
+            "agronomy_output": result.get("agronomy_output"),
+            "climate_output": result.get("climate_output"),
+            "pest_output": result.get("pest_output"),
+            "market_output": result.get("market_output"),
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

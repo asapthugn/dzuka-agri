@@ -17,12 +17,9 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-600">
-            <Link href="/#how-it-works" className="hover:text-primary transition-colors">
-              How It Works
-            </Link>
-            <Link href="/#agents" className="hover:text-primary transition-colors">
-              Agents
-            </Link>
+            <Link href="/#how-it-works" className="hover:text-primary transition-colors">How It Works</Link>
+            <Link href="/#agents" className="hover:text-primary transition-colors">Agents</Link>
+            <Link href="/about" className={`hover:text-primary transition-colors ${pathname === "/about" ? "text-primary font-semibold" : ""}`}>About</Link>
           </div>
 
           <Link
