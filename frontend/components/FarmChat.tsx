@@ -32,19 +32,32 @@ interface FarmContext {
   recommendation?: string;
 }
 
-const SUGGESTIONS = [
-  "Where is Buner and what crops grow there?",
-  "What fertilizer should I apply first?",
-  "When is the best time to sell my crop?",
-  "How do I treat the pest issue found?",
-];
+interface FarmChatProps {
+  context: FarmContext;
+  crop?: string;
+  location?: string;
+}
 
-export default function FarmChat({ context }: { context: FarmContext }) {
+function buildSuggestions(crop: string, location: string): string[] {
+  const c = crop || "my crop";
+  const loc = location || "my area";
+  // Extract just the city part for shorter display
+  const city = loc.split(",")[0].trim();
+  return [
+    `Where is ${city} and what crops grow well there?`,
+    `What fertilizer should I apply first for ${c}?`,
+    `When is the best time to sell ${c} in ${city}?`,
+    `How do I treat the pest issue found in my ${c}?`,
+  ];
+}
+
+export default function FarmChat({ context, crop = "", location = "" }: FarmChatProps) {
+  const suggestions = buildSuggestions(crop, location);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi! I'm **Dzuka**, your farm AI assistant. I have your full farm analysis and I can answer any question — about your soil, pests, market, the weather in your region, local geography, or general agriculture. What would you like to know?",
+      content: `Hi! I'm **Dzuka**, your farm AI assistant. I have the full analysis for your **${crop || "crop"}** farm near **${location.split(",")[0] || "your location"}**. Ask me anything — soil, pests, market prices, weather, or general agriculture.`,
     },
   ]);
   const [input, setInput] = useState("");
@@ -236,7 +249,7 @@ export default function FarmChat({ context }: { context: FarmContext }) {
           {/* Quick suggestions — only shown before any user message */}
           {messages.filter((m) => m.role === "user").length === 0 && (
             <div className="px-4 pb-3 flex flex-wrap gap-1.5">
-              {SUGGESTIONS.map((s) => (
+              {suggestions.map((s) => (
                 <button
                   key={s}
                   onClick={() => send(s)}

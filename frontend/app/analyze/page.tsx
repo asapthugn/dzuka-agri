@@ -567,6 +567,8 @@ export default function AnalyzePage() {
             market: agentOutputs.market,
             recommendation: streamingText,
           }}
+          crop={crop}
+          location={matchedRegion?.region || (geoData?.location as string) || ""}
         />
       )}
     </div>
