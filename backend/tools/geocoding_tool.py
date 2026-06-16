@@ -6,8 +6,11 @@ def reverse_geocode(lat: float, lon: float) -> dict:
     try:
         response = httpx.get(
             "https://nominatim.openstreetmap.org/reverse",
-            params={"format": "json", "lat": lat, "lon": lon},
-            headers={"User-Agent": "DzukaAgri/1.0 (agricultural AI assistant)"},
+            params={"format": "json", "lat": lat, "lon": lon, "accept-language": "en"},
+            headers={
+                "User-Agent": "DzukaAgri/1.0 (agricultural AI assistant)",
+                "Accept-Language": "en",
+            },
             timeout=5,
         )
         data = response.json()
