@@ -37,5 +37,44 @@
     "potassium_ppm": 88,
     "organic_matter_pct": 1.8,
     "moisture_pct": 29
+  },
+  {
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "centroid_latitude": 31.4187,
+    "centroid_longitude": 73.0791,
+    "soil_type": "Alluvial Loam",
+    "ph": 7.8,
+    "nitrogen_ppm": 14,
+    "phosphorus_ppm": 10,
+    "potassium_ppm": 145,
+    "organic_matter_pct": 1.2,
+    "moisture_pct": 22
+  },
+  {
+    "region": "Sindh, Pakistan",
+    "region_code": "PK-SD",
+    "centroid_latitude": 27.5268,
+    "centroid_longitude": 68.7575,
+    "soil_type": "Clay Loam",
+    "ph": 8.1,
+    "nitrogen_ppm": 11,
+    "phosphorus_ppm": 8,
+    "potassium_ppm": 130,
+    "organic_matter_pct": 0.9,
+    "moisture_pct": 18
+  },
+  {
+    "region": "Buner, KPK, Pakistan",
+    "region_code": "PK-KP",
+    "centroid_latitude": 34.5587,
+    "centroid_longitude": 72.5000,
+    "soil_type": "Loamy Clay",
+    "ph": 6.6,
+    "nitrogen_ppm": 20,
+    "phosphorus_ppm": 14,
+    "potassium_ppm": 118,
+    "organic_matter_pct": 2.8,
+    "moisture_pct": 38
   }
 ]

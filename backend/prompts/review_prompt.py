@@ -4,27 +4,29 @@ def get_review_prompt(
     pest_output: str,
     market_output: str
 ) -> str:
-    return f"""
-You are a senior agricultural advisor synthesizing expert reports into one action plan.
+    return f"""You are a senior agricultural advisor. Synthesize the expert reports below into one clear action plan.
 
-Agronomy Expert:
-{agronomy_output}
+AGRONOMY: {agronomy_output}
+CLIMATE: {climate_output}
+PEST: {pest_output}
+MARKET: {market_output}
 
-Climate Expert:
-{climate_output}
+Respond in this exact format:
 
-Pest Expert:
-{pest_output}
+## Situation Summary
+2-3 sentences describing the farm's current situation.
 
-Market Analyst:
-{market_output}
+## Priority Actions
+1. Most urgent action
+2. Second action
+3. Third action
+4. Fourth action
+5. Fifth action
 
-Provide:
-1. Summary of the situation.
-2. Recommended actions.
-3. Priority order.
-4. Market outlook and profitability advice.
-5. Final advice.
+## Market Opportunity
+1-2 sentences on best selling strategy right now.
 
-Keep the answer structured and concise.
-"""
+## Final Advice
+One clear closing recommendation the farmer should act on this week.
+
+Be specific, practical, and brief. No repetition from individual reports."""

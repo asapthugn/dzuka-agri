@@ -38,5 +38,125 @@
     "region": "Southern Malawi",
     "region_code": "MW-S",
     "month": "June"
+  },
+  {
+    "crop": "Wheat",
+    "price_per_kg_usd": 0.28,
+    "demand": "very high",
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "month": "June"
+  },
+  {
+    "crop": "Cotton",
+    "price_per_kg_usd": 0.65,
+    "demand": "high",
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "month": "June"
+  },
+  {
+    "crop": "Maize",
+    "price_per_kg_usd": 0.19,
+    "demand": "high",
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "month": "June"
+  },
+  {
+    "crop": "Rice",
+    "price_per_kg_usd": 0.48,
+    "demand": "very high",
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "month": "June"
+  },
+  {
+    "crop": "Groundnut",
+    "price_per_kg_usd": 0.72,
+    "demand": "medium",
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "month": "June"
+  },
+  {
+    "crop": "Soybean",
+    "price_per_kg_usd": 0.52,
+    "demand": "low",
+    "region": "Punjab, Pakistan",
+    "region_code": "PK-PB",
+    "month": "June"
+  },
+  {
+    "crop": "Cotton",
+    "price_per_kg_usd": 0.60,
+    "demand": "high",
+    "region": "Sindh, Pakistan",
+    "region_code": "PK-SD",
+    "month": "June"
+  },
+  {
+    "crop": "Wheat",
+    "price_per_kg_usd": 0.26,
+    "demand": "high",
+    "region": "Sindh, Pakistan",
+    "region_code": "PK-SD",
+    "month": "June"
+  },
+  {
+    "crop": "Rice",
+    "price_per_kg_usd": 0.50,
+    "demand": "high",
+    "region": "Sindh, Pakistan",
+    "region_code": "PK-SD",
+    "month": "June"
+  },
+  {
+    "crop": "Maize",
+    "price_per_kg_usd": 0.21,
+    "demand": "medium",
+    "region": "Sindh, Pakistan",
+    "region_code": "PK-SD",
+    "month": "June"
+  },
+  {
+    "crop": "Maize",
+    "price_per_kg_usd": 0.23,
+    "demand": "very high",
+    "region": "Buner, KPK, Pakistan",
+    "region_code": "PK-KP",
+    "month": "June"
+  },
+  {
+    "crop": "Wheat",
+    "price_per_kg_usd": 0.30,
+    "demand": "high",
+    "region": "Buner, KPK, Pakistan",
+    "region_code": "PK-KP",
+    "month": "June"
+  },
+  {
+    "crop": "Tobacco",
+    "price_per_kg_usd": 2.10,
+    "demand": "high",
+    "region": "Buner, KPK, Pakistan",
+    "region_code": "PK-KP",
+    "month": "June"
+  },
+  {
+    "crop": "Rice",
+    "price_per_kg_usd": 0.46,
+    "demand": "medium",
+    "region": "Buner, KPK, Pakistan",
+    "region_code": "PK-KP",
+    "month": "June"
+  },
+  {
+    "crop": "Groundnut",
+    "price_per_kg_usd": 0.68,
+    "demand": "medium",
+    "region": "Buner, KPK, Pakistan",
+    "region_code": "PK-KP",
+    "month": "June"
   }
 ]

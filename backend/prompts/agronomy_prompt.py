@@ -1,17 +1,22 @@
-def get_agronomy_prompt(crop: str, soil_data: list) -> str:
-    return f"""
-You are an agricultural expert specializing in crop management.
+def get_agronomy_prompt(crop: str, soil_data: dict, region: str) -> str:
+    return f"""You are an expert agronomist. Be concise and actionable only.
 
+Region: {region}
 Crop: {crop}
+Soil Data: {soil_data}
 
-Soil Data:
-{soil_data}
+Respond in this exact format:
 
-Provide:
-1. Best farming practices for this crop given the soil data.
-2. Fertilizer recommendations (type, quantity, timing).
-3. Irrigation recommendations.
-4. Optimal planting season and spacing.
+## Soil Assessment
+- 2-3 bullet points about the soil condition in {region}
 
-Keep the answer concise and practical.
-"""
+## Fertilizer Plan
+- Specific type, quantity, and timing (e.g. "Apply 50kg/ha Urea at planting")
+
+## Irrigation
+- Frequency and amount based on the soil moisture data above
+
+## Key Farming Tips
+- 2-3 most important practices for {crop} in {region}
+
+No introductions. No conclusions. Facts and actions only."""

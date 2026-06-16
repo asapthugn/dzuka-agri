@@ -4,7 +4,7 @@ from typing import Optional, Dict, Any
 class RecommendationRequest(BaseModel):
     # Required by UI and LangGraph Agents
     crop: str = Field(..., description="Type of crop, e.g., 'maize'")
-    symptoms: str = Field(..., description="Description of the issue, e.g., 'yellow leaves'")
+    symptoms: str = Field("", description="Description of the issue, e.g., 'yellow leaves'")
     latitude: float
     longitude: float
     

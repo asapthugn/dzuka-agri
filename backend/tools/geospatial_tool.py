@@ -32,19 +32,23 @@ def get_nearest_region(lat: float, lon: float) -> Optional[Dict[str, Any]]:
     soil_data = _load_mock_data("soil.json")
     if not soil_data:
         return None
-        
-    # Fix applied: Added `or 0.0` fallback in case a centroid is missing
-    closest = min(soil_data, key=lambda x: haversine_distance(
-        lat, lon, 
-        x.get("centroid_latitude") or 0.0, 
-        x.get("centroid_longitude") or 0.0
-    ))
-    
+
+    def dist(x):
+        return haversine_distance(
+            lat, lon,
+            x.get("centroid_latitude") or 0.0,
+            x.get("centroid_longitude") or 0.0
+        )
+
+    closest = min(soil_data, key=dist)
+    distance_km = dist(closest)
+
     return {
         "region": closest.get("region"),
         "region_code": closest.get("region_code"),
         "centroid_latitude": closest.get("centroid_latitude"),
-        "centroid_longitude": closest.get("centroid_longitude")
+        "centroid_longitude": closest.get("centroid_longitude"),
+        "distance_km": round(distance_km, 1),
     }
 
 def geospatial_lookup(latitude: float, longitude: float, crop: Optional[str] = None) -> Dict[str, Any]:
@@ -56,8 +60,12 @@ def geospatial_lookup(latitude: float, longitude: float, crop: Optional[str] = N
     region_code = nearest["region_code"]
     
     # Filter specific data by region code
+    from datetime import datetime
+    current_month = datetime.now().strftime("%B")
+
     soil_data = next((item for item in _load_mock_data("soil.json") if item.get("region_code") == region_code), None)
-    weather_data = next((item for item in _load_mock_data("weather.json") if item.get("region_code") == region_code), None)
+    all_weather = [item for item in _load_mock_data("weather.json") if item.get("region_code") == region_code]
+    weather_data = next((w for w in all_weather if w.get("month") == current_month), all_weather[0] if all_weather else None)
     
     # Market data is a list, and we optionally filter by crop
     market_data = [
