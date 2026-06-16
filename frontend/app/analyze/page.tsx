@@ -361,19 +361,14 @@ export default function AnalyzePage() {
                     <MapPin className="w-3 h-3" />{lat}, {lng}
                     {geoLoading && <Loader2 className="w-3 h-3 animate-spin ml-0.5" />}
                   </div>
-                  {geoRegion?.region && (
+                  {(geoData?.location as string) && (
                     <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium border border-blue-100">
-                      📍 {geoRegion.region}
+                      📍 {geoData?.location as string}
                     </span>
                   )}
-                  {geoSoil?.soil_type && (
-                    <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-medium border border-amber-100">
-                      🌱 {geoSoil.soil_type} · pH {geoSoil.ph}
-                    </span>
-                  )}
-                  {geoWeather?.season && (
+                  {(geoData?.weather as Record<string, number>)?.temp_c !== undefined && (
                     <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-medium border border-sky-100">
-                      🌤 {geoWeather.season} season · {geoWeather.avg_temp_c}°C
+                      🌤 {(geoData?.weather as Record<string, number>).temp_c}°C · 💧 {(geoData?.weather as Record<string, number>).humidity_pct}%
                     </span>
                   )}
                 </div>

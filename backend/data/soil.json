@@ -76,5 +76,44 @@
     "potassium_ppm": 118,
     "organic_matter_pct": 2.8,
     "moisture_pct": 38
+  },
+  {
+    "region": "Rawalpindi/Islamabad, Pakistan",
+    "region_code": "PK-RWP",
+    "centroid_latitude": 33.6007,
+    "centroid_longitude": 73.0679,
+    "soil_type": "Sandy Clay Loam",
+    "ph": 7.2,
+    "nitrogen_ppm": 16,
+    "phosphorus_ppm": 11,
+    "potassium_ppm": 125,
+    "organic_matter_pct": 1.5,
+    "moisture_pct": 28
+  },
+  {
+    "region": "Peshawar, KPK, Pakistan",
+    "region_code": "PK-PEW",
+    "centroid_latitude": 34.0151,
+    "centroid_longitude": 71.5249,
+    "soil_type": "Clay Loam",
+    "ph": 7.5,
+    "nitrogen_ppm": 17,
+    "phosphorus_ppm": 12,
+    "potassium_ppm": 120,
+    "organic_matter_pct": 1.8,
+    "moisture_pct": 30
+  },
+  {
+    "region": "Multan, Punjab, Pakistan",
+    "region_code": "PK-MLT",
+    "centroid_latitude": 30.1575,
+    "centroid_longitude": 71.5249,
+    "soil_type": "Silty Clay",
+    "ph": 8.3,
+    "nitrogen_ppm": 12,
+    "phosphorus_ppm": 9,
+    "potassium_ppm": 155,
+    "organic_matter_pct": 0.8,
+    "moisture_pct": 16
   }
 ]

@@ -1,22 +1,21 @@
-def get_climate_prompt(latitude: float, longitude: float, weather_data: dict | list, region: str) -> str:
-    return f"""You are a climate advisor for agriculture. Be concise and actionable only.
+def get_climate_prompt(lat: float, lon: float, weather_data: dict | list, location: str) -> str:
+    return f"""You are a climate advisor for agriculture.
 
-Region: {region}
-Location: Lat {latitude}, Lon {longitude}
-Weather Data: {weather_data}
+Location: {location} (coordinates: {lat}, {lon})
+Live Weather Data: {weather_data}
 
 Respond in this exact format:
 
-## Current Conditions in {region}
-- Temperature, humidity, rainfall summary (2-3 bullets)
+## Current Conditions in {location}
+- Temperature, rainfall, and humidity from the live data above
 
 ## Climate Risks
-- Top 2 risks for this region and season
+- Top 2 risks for farming in {location} this season
 
 ## Irrigation Advice
-- Specific recommendation based on current rainfall data
+- Specific recommendation based on the rainfall data
 
 ## Best Planting Window
-- Recommended months for this region
+- Best months to plant crops in {location} based on its climate
 
 No introductions. No conclusions. Facts and actions only."""

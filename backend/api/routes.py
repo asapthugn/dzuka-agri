@@ -59,11 +59,10 @@ async def recommendation_stream(request: RecommendationRequest):
                 "final_recommendation": None,
             }
 
-            # Resolve nearest region once and emit it to the frontend
-            from tools.geospatial_tool import get_nearest_region
-            nearest = get_nearest_region(request.latitude, request.longitude)
-            if nearest:
-                yield f"data: {json.dumps({'type': 'region', 'region': nearest['region'], 'region_code': nearest['region_code'], 'distance_km': nearest.get('distance_km', 0)})}\n\n"
+            # Resolve real location name via reverse geocoding
+            from tools.geocoding_tool import reverse_geocode
+            location = reverse_geocode(request.latitude, request.longitude)
+            yield f"data: {json.dumps({'type': 'region', 'region': location['display'], 'region_code': '', 'distance_km': 0})}\n\n"
 
             # Run the 4 specialist agents
             state.update(agronomy_agent(state))

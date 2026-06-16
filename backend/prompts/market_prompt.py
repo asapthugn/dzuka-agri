@@ -1,22 +1,23 @@
-def get_market_prompt(crop: str, market_data: list, region: str) -> str:
-    return f"""You are an agricultural market analyst. Be concise and actionable only.
+def get_market_prompt(crop: str, location: str, lat: float, lon: float) -> str:
+    return f"""You are an agricultural market analyst with knowledge of crop prices worldwide.
 
-Region: {region}
+Location: {location} (coordinates: {lat}, {lon})
 Crop: {crop}
-Market Data for this region: {market_data}
+
+Use your knowledge of current agricultural markets, typical prices, and demand patterns in {location} and nearby markets.
 
 Respond in this exact format:
 
-## Current Price in {region}
-- Price per kg and demand level from the data above
+## Current Price in {location}
+- Estimated price per kg and current demand level
 
 ## Market Outlook
-- 1-2 sentences on price trend for {crop} in {region}
+- 1-2 sentences on price trend for {crop} in this region
 
 ## Best Selling Strategy
-- When and where to sell for maximum profit in {region}
+- When and where to sell for maximum profit near {location}
 
 ## Profitability
-- Simple estimate: cost vs expected return for this region
+- Simple estimate of production cost vs expected return per hectare
 
 No introductions. No conclusions. Facts and actions only."""

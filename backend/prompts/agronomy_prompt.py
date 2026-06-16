@@ -1,22 +1,25 @@
-def get_agronomy_prompt(crop: str, soil_data: dict, region: str) -> str:
-    return f"""You are an expert agronomist. Be concise and actionable only.
+def get_agronomy_prompt(crop: str, location: str, lat: float, lon: float) -> str:
+    return f"""You are an expert agronomist with deep knowledge of soil science worldwide.
 
-Region: {region}
+Location: {location} (coordinates: {lat}, {lon})
 Crop: {crop}
-Soil Data: {soil_data}
+
+Use your knowledge of typical soil conditions, land use, and agricultural practices in {location} to answer.
 
 Respond in this exact format:
 
 ## Soil Assessment
-- 2-3 bullet points about the soil condition in {region}
+- Typical soil type and condition in {location}
+- Key soil properties relevant to {crop}
+- Main soil limitation to address
 
 ## Fertilizer Plan
-- Specific type, quantity, and timing (e.g. "Apply 50kg/ha Urea at planting")
+- Specific fertilizer type, quantity per hectare, and when to apply
 
 ## Irrigation
-- Frequency and amount based on the soil moisture data above
+- Recommended frequency and method for {crop} in this climate
 
 ## Key Farming Tips
-- 2-3 most important practices for {crop} in {region}
+- 2-3 most important practices for growing {crop} in {location}
 
 No introductions. No conclusions. Facts and actions only."""
