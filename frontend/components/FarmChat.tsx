@@ -36,6 +36,7 @@ interface FarmChatProps {
   context: FarmContext;
   crop?: string;
   location?: string;
+  suggestions?: string[];
 }
 
 function buildSuggestions(crop: string, location: string): string[] {
@@ -51,8 +52,9 @@ function buildSuggestions(crop: string, location: string): string[] {
   ];
 }
 
-export default function FarmChat({ context, crop = "", location = "" }: FarmChatProps) {
-  const suggestions = buildSuggestions(crop, location);
+export default function FarmChat({ context, crop = "", location = "", suggestions: propSuggestions = [] }: FarmChatProps) {
+  // Use agent-generated suggestions when available, otherwise fall back to generic ones
+  const suggestions = propSuggestions.length > 0 ? propSuggestions : buildSuggestions(crop, location);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {

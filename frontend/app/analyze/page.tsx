@@ -117,6 +117,7 @@ export default function AnalyzePage() {
   const [agentOutputs, setAgentOutputs] = useState<AgentOutputs>({});
   const [streamingText, setStreamingText] = useState("");
   const [isDone, setIsDone] = useState(false);
+  const [chatSuggestions, setChatSuggestions] = useState<string[]>([]);
   const [imageAnalysis, setImageAnalysis] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [geoData, setGeoData] = useState<Record<string, unknown> | null>(null);
@@ -189,7 +190,7 @@ export default function AnalyzePage() {
 
     setValidationMsg(""); setLoading(true); setError(null);
     setAgentOutputs({}); setStreamingText(""); setIsDone(false);
-    setImageAnalysis(null); setActiveAgent(null); setMatchedRegion(null);
+    setImageAnalysis(null); setActiveAgent(null); setMatchedRegion(null); setChatSuggestions([]);
 
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth" }), 300);
 
@@ -237,6 +238,8 @@ export default function AnalyzePage() {
               setActiveAgent("review");
             } else if (ev.type === "token") {
               setStreamingText((p) => p + ev.content);
+            } else if (ev.type === "suggestions") {
+              setChatSuggestions(ev.items || []);
             } else if (ev.type === "done") {
               setIsDone(true); setLoading(false); setActiveAgent(null);
             } else if (ev.type === "error") {
@@ -255,7 +258,7 @@ export default function AnalyzePage() {
     setCrop(""); setLat(null); setLng(null); setSymptoms("");
     setImage(null); setImagePreview(null); setAgentOutputs({});
     setStreamingText(""); setIsDone(false); setImageAnalysis(null);
-    setError(null); setGeoData(null); setValidationMsg(""); setActiveAgent(null); setShowMap(false); setMatchedRegion(null);
+    setError(null); setGeoData(null); setValidationMsg(""); setActiveAgent(null); setShowMap(false); setMatchedRegion(null); setChatSuggestions([]);
   };
 
   const copyToClipboard = () => {
@@ -569,6 +572,7 @@ export default function AnalyzePage() {
           }}
           crop={crop}
           location={matchedRegion?.region || (geoData?.location as string) || ""}
+          suggestions={chatSuggestions}
         />
       )}
     </div>

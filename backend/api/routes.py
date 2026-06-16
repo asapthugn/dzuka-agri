@@ -99,6 +99,34 @@ async def recommendation_stream(request: RecommendationRequest):
                 if delta:
                     yield f"data: {json.dumps({'type': 'token', 'content': delta})}\n\n"
 
+            # Generate dynamic chatbot suggestions based on actual agent findings
+            suggestion_prompt = f"""Based on this farm analysis, write exactly 4 short follow-up questions a farmer would ask.
+Make them SPECIFIC to the actual findings — mention the real disease name, fertilizer, crop, location, price etc.
+Return ONLY a valid JSON array of 4 strings. No explanation, no markdown, no extra text.
+
+AGRONOMY: {state['agronomy_output']}
+PEST: {state['pest_output']}
+MARKET: {state['market_output']}
+CLIMATE: {state['climate_output']}
+
+Example format: ["Question 1?", "Question 2?", "Question 3?", "Question 4?"]"""
+
+            try:
+                suggestion_resp = client.chat.completions.create(
+                    model=TEXT_MODEL,
+                    messages=[{"role": "user", "content": suggestion_prompt}],
+                    stream=False,
+                    max_tokens=200,
+                )
+                raw = suggestion_resp.choices[0].message.content.strip()
+                # Extract the JSON array even if the model adds extra text
+                start = raw.find("[")
+                end = raw.rfind("]") + 1
+                suggestions = json.loads(raw[start:end]) if start != -1 else []
+                yield f"data: {json.dumps({'type': 'suggestions', 'items': suggestions})}\n\n"
+            except Exception:
+                pass  # suggestions are optional — don't fail the whole request
+
             yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
         except Exception as e:
