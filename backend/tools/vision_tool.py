@@ -1,12 +1,12 @@
 import base64
-from services.openai_service import client
+from services.openai_service import client, VISION_MODEL
 
 
 def analyze_crop_image(image_bytes: bytes, crop: str) -> str:
     base64_image = base64.b64encode(image_bytes).decode("utf-8")
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model=VISION_MODEL,
         messages=[
             {
                 "role": "user",

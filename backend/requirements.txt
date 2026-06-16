@@ -9,5 +9,6 @@ pydantic
 requests
 geopy
 openai
+groq>=1.4.0
 pillow
 python-multipart>=0.0.9
