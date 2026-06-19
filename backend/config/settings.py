@@ -6,5 +6,7 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 
+import sys
+
 if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY is not set in .env")
+    print("Warning: OPENAI_API_KEY is not set. (Optional if only using Groq)", file=sys.stderr)

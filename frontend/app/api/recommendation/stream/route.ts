@@ -6,8 +6,9 @@ export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
+  const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000").replace(/\/$/, "");
   const backendRes = await fetch(
-    "http://localhost:8000/api/recommendation/stream",
+    `${backendUrl}/api/recommendation/stream`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

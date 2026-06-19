@@ -6,7 +6,8 @@ export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  const backendRes = await fetch("http://localhost:8000/api/chat/stream", {
+  const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000").replace(/\/$/, "");
+  const backendRes = await fetch(`${backendUrl}/api/chat/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
