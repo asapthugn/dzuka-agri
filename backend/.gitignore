@@ -1,0 +1,31 @@
+# Environment
+.env
+backend/venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude / AI tooling
+CLAUDE.md
+**/CLAUDE.md
+AGENTS.md
+**/AGENTS.md
+.claude/
+.venv/
+.venv/
+backend/.venv/
